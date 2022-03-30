@@ -1,0 +1,51 @@
+.item-native {
+    background: transparent !important;
+    border: none !important;
+}
+
+.app {
+    background: var(--ion-color-insideapp) !important;
+    color: #F8F8F8 !important;
+}
+
+.btnapp {
+    height: 50px;
+    background: var(--ion-color-btnapp) !important;
+    color: #F8F8F8 !important;
+}
+
+@media screen and (min-width: 769px) {
+    .signin_foot {
+        bottom: 0% !important;
+        position: fixed;
+        width: 100%;
+    }
+    
+    .signin_head {
+        margin: auto 0 !important;
+    }
+}
+
+@media screen and (min-device-width: 481px) and (max-device-width: 768px) { 
+    .signin_foot {
+        bottom: 0% !important;
+        position: fixed;
+        width: 100%;
+    }
+    
+    .signin_head {
+        margin: auto 0 !important;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    .signin_foot {
+        bottom: 0% !important;
+        position: fixed;
+        width: 100%;
+    }
+    
+    .signin_head {
+        margin: auto 0 !important;
+    }
+}

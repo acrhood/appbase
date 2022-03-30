@@ -1,0 +1,93 @@
+
+<ion-content class="ion-padding animate__animated animate__slideInUp" style="animation-duration: 0.3s !important;">
+  <ion-header style="box-shadow: none">
+    <ion-toolbar class="gradient-header" color="app" style="background: #fff;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/{{ route }}" (click)="dismiss()"></ion-back-button>
+    </ion-buttons>
+    <ion-title [routerLink]="['/menu']">
+      <img src="../../../assets/icon/logo.svg" style="width: auto;height: 30px;margin: 0 auto;margin-top: 5px;">
+    </ion-title>
+  </ion-toolbar>
+  </ion-header>
+  <ion-grid>
+    <h5> {{ nombre }} </h5>
+    <ion-row *ngIf="fileslength == 1">
+      <ion-img src="{{ file }}" alt="" style="margin: 0 auto; width: 100%; background: transparent;"></ion-img>
+    </ion-row>
+    <ion-grid *ngIf="fileslength > 1">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let item of listaimgs">
+          <ion-img [src]="item[0]" alt=""></ion-img>
+        </ion-slide>
+      </ion-slides>
+    </ion-grid>
+    <ion-row> <!-- *ngIf="detallecupon.length > 0" -->
+      <ion-grid>
+        <small>Ésta promoción incluye:</small>
+        <ion-row>
+          <ion-col *ngFor="let item of detallecupon" size="2">
+            <img src="https://food.pipecr.com/assets/imgs/{{ item[4] }}" style="height: 50px; width: 50px;">
+            <span class="spancant" *ngIf="item[3] != 1"> {{ item[3] }} </span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- VISTA PREVIA DE PRODUCTOS RELACIONADOS AL CUPON -->
+    </ion-row>
+    <ion-row>
+      <ion-col size="6" align="center">
+        <label style="margin-bottom: 15px !important; font-size: 1em">₡</label>
+        <span style="font-size: 2em;">{{ tprecio | number:'1.0-2' }}</span>
+        <span style="display:none">{{ precio }}</span>
+      </ion-col>
+      <!-- <ion-col size="12" style="position: absolute; z-index: 1000; margin-top: -60px;">
+        <div [(ngModel)]="isfav" *ngIf="isfav != 1" (click)="setfavorito()" id="favorito" align="right" ngDefaultControl>
+          <ion-icon style="font-size: 2.4em; color: #fff; background: rgba(0,0,0,0.1); padding: 1.2%; border-radius: 50%; margin-right: 15%" name="bookmark-outline"></ion-icon>
+        </div>
+        <div [(ngModel)]="isfav" *ngIf="isfav == 1" (click)="setfavorito()" id="favorito" align="right" ngDefaultControl>
+          <ion-icon style="font-size: 2.4em; color: #e9c835; background: rgba(0,0,0,0.1); padding: 1.2%; border-radius: 50%; margin-right: 15%" name="bookmark"></ion-icon>
+        </div>
+      </ion-col> -->
+      <ion-col size="6">
+        <div class="quantity-selector">
+          <div class="product-minus-button quantity-button"  (click)="restoCant()"><ion-icon class="iconcant" name="remove-outline"></ion-icon></div>
+          <input type="number" class="quantity-selector-field" (blur)="inputCant()" id="cant" value="1" data-max="2" #cant>
+          <div class="product-plus-button quantity-button" (click)="plusCant()"><ion-icon class="iconcant" name="add-outline"></ion-icon></div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row style="background: #fafafa">
+      <!-- <ion-col align="center">
+        <small>Ahorro en compra:</small><br>
+        <ion-chip color="secondary">
+          <ion-label><b>{{ porc | number : '.2-2' }}%</b></ion-label>&nbsp;
+          <ion-label><s>₡ {{ wodesc }}</s></ion-label>
+        </ion-chip>
+      </ion-col> -->
+      <ion-col align="center">
+        <small>Termina:</small><br>
+        <ion-chip color="dark">
+          <ion-label *ngIf="tipopublic == 1"><b>{{ ffin | date:'shortDate' }}</b> {{ ffin | date:'shortTime' }}</ion-label>
+          <ion-label *ngIf="tipopublic == 2"><b>Hoy</b></ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+    <ion-row><br>
+      <ion-button (click)="addToOrden( idcupon )" style="width: 100%;" class="gradient-order btnapp" color="app">
+        <p style="color: white; font-weight: 500;">AGREGAR AL CARRITO</p>
+      </ion-button>
+    </ion-row><br>
+    <!-- <ion-row>
+      <ion-card-content>
+        <p style="font-weight: 300; color: #525252;" align="left">Entrega aprox.: <b>de 24 a 48</b> horas hábiles para entrega con Correos de Costa Rica</p>
+      </ion-card-content>
+    </ion-row> -->
+    <ion-row>
+      <ion-card-content style="background: #f7f7f7; width: 100%;">
+        <p>Descripción del cupón</p>
+        <label style="font-weight: 300; color: #929292;"> {{ descr }}</label>
+      </ion-card-content>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

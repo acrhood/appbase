@@ -1,0 +1,22 @@
+.app {
+    background-color: var(--ion-color-insideapp) !important;
+    color: #F8F8F8 !important;
+}
+
+.name-text {
+    margin-left: 20px !important;
+}
+
+.mail-text {
+    color: rgba(0, 0, 0, 0.5);
+    margin-left: 20px !important;
+}
+
+.cart-icon {
+    position: fixed;
+}
+
+#badgeorders {
+    color: white !important;
+    background: transparent !important;
+}

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar class="gradient-header" color="app" style="background: #fff;">
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()" defaultHref="/directions"></ion-back-button>
+    </ion-buttons>
+    <ion-title slot="end">Agregar direcciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <ion-col size="12">
+        <h3>Agregar dirección</h3>
+        <label style="color: #444;">Distancia máxima de entrega: <b>{{ maxrango }} km</b></label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="btnmap">
+      <div #Map class="map"></div>
+    </ion-row><br><br>
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input [(ngModel)]="direccion" placeholder="Casa, Trabajo"></ion-input>
+    </ion-item><br>
+    <ion-item>
+      <ion-label position="stacked">Dirección</ion-label>
+      <ion-textarea [(ngModel)]="otrasenas" placeholder="100mts sur, Casa Amarilla"></ion-textarea>
+    </ion-item><br>
+    <ion-item>
+      <ion-label>Teléfono</ion-label>
+      <ion-input maxlength="8" pattern="tel" [(ngModel)]="phone"></ion-input>
+    </ion-item><br>
+    <ion-button class="btnapp gradient-order" color="app" size="block" (click)="regDireccion()" id="regDir">
+      <p style="color: white; font-weight: 500;">AGREGAR DIRECCION</p>
+    </ion-button>
+  </ion-grid>
+  <!-- <div #Map class="map"></div> -->
+</ion-content>

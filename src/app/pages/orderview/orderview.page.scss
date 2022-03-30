@@ -1,0 +1,46 @@
+.app {
+    background: var(--ion-color-insideapp) !important;
+    color: #F8F8F8 !important;
+}
+
+.btnapp{
+    color: #f8f8f8;
+    height: 50px;
+    border-radius: 0.5em;
+}
+
+ion-avatar ion-img, ion-avatar img{
+    width: 62px !important;
+    height: 62px !important;
+    border-radius: 40% !important;
+}
+
+.li {
+    display: inline-block;
+    width: 33%;
+}
+
+.icon {
+    width: 24px; height: 24px;
+    // background: var(--ion-color-danger) 50%;
+    padding: 2%;
+    color: var(--ion-color-danger);
+    border-radius: 50%;
+    margin-bottom: -25px;
+}
+
+.icon_ {
+    width: 24px; height: 24px;
+    background: white;
+    padding: 2%;
+    color: var(--ion-color-light);
+    border-radius: 50%;
+    margin-bottom: -10px;
+}
+
+.progressbar {
+    margin-top: -25 px;
+    margin: 0 auto;
+    width: 68%;
+    border-radius: 20px;
+}

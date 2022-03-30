@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar class="gradient-header" color="app">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-xs="2" size-sm="2" size-md="1">
+          <ion-menu-button>
+            <img src="https://food.pipecr.com/assets/imgs/avatar.svg" style="width: 100%; margin: 0 auto; border-radius: 50%;">
+          </ion-menu-button>
+        </ion-col>
+        <ion-col size-xs="8" size-sm="8" size-md="10" [routerLink]="['/menu']">
+          <ion-col class="ion-padding">
+            <ion-badge [routerLink]="['/menu']" style="font-size: 14px; font-weight: 400; padding: 2%;" color="light">Seguir comprando</ion-badge>
+          </ion-col>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <h6>Favoritos</h6>
+  <ion-list id="lfavoritos" align-items-center>
+    <section *ngFor="let item of listaFavoritos">
+      <ion-item>
+        <!-- <ion-col size="3" align-items-center style="width: 75px; height: 75px; max-width: 75px !important; max-height: 75px !important;">
+          <ion-img [src]="item[10]" style="margin: -25% auto !important;" (click)="verDetalle( item[0] )" ></ion-img>
+        </ion-col> -->
+        <ion-avatar style="width: 50px; padding: 0 2% 0 0;">
+          <ion-img [src]="item[10]" (click)="verDetalle( item[0] )" style="margin: -25% auto !important;"></ion-img>
+        </ion-avatar>
+        <ion-col size="9" align-items-center>
+          <ion-label style="font-weight: 300;">{{ item[1]}}</ion-label>
+          <ion-label style="color: #929292; font-weight: 300; font-size: 0.9em;">{{ item[2] }}</ion-label>
+          <ion-label style="font-weight: 400; display: inline-block; margin-top: 0.5em; color: #000; font-size: 1em;">₡ {{ item[3] | number:'1.0-2' }}</ion-label>
+          <ion-row>
+            <ion-col size="6">
+              <ion-chip color="danger" align="center" (click)="setfavorito( item[0] )">
+                <ion-icon name="heart"></ion-icon>
+                <ion-label>Quitar</ion-label>
+              </ion-chip>
+            </ion-col>
+            <ion-col size="6">
+              <!-- <ion-chip color="{{item[11] != null ? 'success' : 'dark'}}" align="center"
+                (click)="getOptions(item[0], item[1], item[10])" id="fte{{ item[0] }}">
+                <ion-icon id="ico{{ item[0] }}" name="{{item[11] != null ? 'checkmark' : 'add'}}"></ion-icon>
+                <ion-label id="txt{{ item[0] }}">{{item[11] != null ? 'Agregado' : 'Agregar'}}</ion-label>
+              </ion-chip> -->
+              <ion-chip color="dark" align="center" (click)="getOptions( item[0], item[1], item[10] )" id="fte{{ item[0] }}">
+                <ion-icon id="ico{{ item[0] }}" name="add"></ion-icon>
+                <ion-label id="txt{{ item[0] }}">Agregar</ion-label>
+                &nbsp;&nbsp;<ion-badge color="btnapp" *ngIf="item[11] != null">{{item[12] != 0 ? item[12] : 0}}</ion-badge>
+              </ion-chip>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-item>
+    </section>
+
+    <div *ngIf="!listaFavoritos">
+      <ion-item *ngFor="let item of [1,2,3,4,5,6]">
+          <ion-skeleton-text animated style="height: 70px"></ion-skeleton-text>
+        <ion-col size="9" align-items-center>
+          <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+          <ion-skeleton-text animated></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>
+          <ion-row>
+            <ion-col size="6">
+              <ion-skeleton-text animated style="height: 40px; border-radius: 2.5em;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="6">
+              <ion-skeleton-text animated style="height: 40px; border-radius: 2.5em;"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-item>
+    </div>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,13 @@
+android/
+ios/
+www/
+node_modules/
+.DS_Store
+.gradle/
+src/.DS_Store
+src/app/.DS_Store
+src/app/components/.DS_Store
+src/app/modals/.DS_Store
+src/app/pages/.DS_Store
+src/app/pages/menu/.DS_Store
+src/assets/.DS_Store

@@ -1,0 +1,53 @@
+.app {
+    background: var(--ion-color-insideapp) !important;
+    color: #F8F8F8 !important;
+}
+
+.btnapp{
+  color: #f8f8f8;
+  height: 50px;
+  border-radius: 0.5em;
+}
+
+.border-color {
+  border: 1px solid var(--ion-color-insideapp);
+  // border: 2px solid var(–-ion-color-insideapp) !important;
+}
+
+// ****************************************
+.quantity-selector {
+  clear: both;
+  visibility: visible;
+  display: block;
+  width: 100%;
+}
+.product-minus-button,
+.product-plus-button {
+  padding: 0;
+  margin-top: 5px;
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  cursor: pointer;
+  float: left;
+  font-size: 20px;
+  background: #e5e5e5;
+  border-radius: 50%;
+}
+.quantity-selector input {
+  max-width: 70px;
+  background: transparent;
+  font-size: 1em;
+  position: relative;
+  z-index: 1;
+  margin: -5px -1px;
+  float: left;
+  display: block;
+  width: 41%;
+  text-align: center;
+  height: 45px;
+  border: none;
+}
+.iconcant {
+   margin-top: 4px;
+}

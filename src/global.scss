@@ -1,0 +1,98 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+.error-modal {
+    padding: 18vh 30px 18vh 25px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.alert-modal {
+    padding: 18vh 30px 18vh 25px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-modal {
+    padding: 45vh 0px 0vh 0px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.options-modal {
+    padding: 20vh 30px 35vh 30px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.optionsProducts-modal {
+    // padding: 10% 30px 10vh 10%;
+    padding: 20% 0% 0% 0%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.detail-modal {
+    // padding: 10% 30px 10vh 10%;
+    padding: 40% 5%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.pin-modal {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-wrapper.sc-ion-modal-md{
+    border-radius: 0.8em !important;
+}
+.sc-ion-modal-md-h {
+    --background: none;
+}
+.sc-ion-modal-ios-h {
+    --background: none;
+}
+
+.menu-fixed {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    height: 100px;
+}
+
+.header-md:after{
+    position: relative !important;
+}
+
+// .gradient-header{
+    // background: linear-gradient(145deg, var(--ion-color-app) 30%, var(--ion-color-app-shade) 60%, var(--ion-color-app-tint) 100%);
+    // background: var(--ion-color-app);
+// }
+
+.gradient-order {
+    // background: var(--ion-color-app-tint) !important;
+    background: linear-gradient(145deg, var(--ion-color-app) 30%, var(--ion-color-app-shade) 60%, var(--ion-color-app-tint) 100%);
+}
+
+.gradient-add {
+    // background: var(--ion-color-app-tint) !important;
+    background: linear-gradient(145deg, var(--ion-color-app) 30%, var(--ion-color-app-shade) 60%, var(--ion-color-app-tint) 100%);
+}

@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar class="gradient-header" color="app">
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="https://food.pipecr.com/assets/imgs/avatar.svg" style="width: 100%; margin: 0 auto; border-radius: 50%;">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title [routerLink]="['/menu']">
+      <ion-col class="ion-padding">
+        <ion-badge [routerLink]="['/menu']" style="font-size: 14px; font-weight: 400; padding: 2%;" color="light">Seguir comprando</ion-badge>
+      </ion-col>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="color: #7C7C7C;">
+  <ion-grid class="ion-padding ion-margin-top" *ngIf="user; else signin">
+    <ion-row>
+      <h3>Configuración</h3>
+    </ion-row>
+    <ion-row class="ion-padding ion-margin-top" style="background: #f7f7f7;" [routerLink]="['/infouser']">
+      <ion-col size="2">
+        <ion-icon name="information-circle-outline"></ion-icon>
+      </ion-col>
+      <ion-col size="10">
+        <ion-label>Mis Datos</ion-label>
+        <ion-icon *ngIf="!platform.is('ios')" name="arrow-forward"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding ion-margin-top" style="background: #f7f7f7;" [routerLink]="['/security']">
+      <ion-col size="2">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+      </ion-col>
+      <ion-col size="10">
+        <ion-label>Seguridad</ion-label>
+        <ion-icon *ngIf="!platform.is('ios')" name="arrow-forward"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding ion-margin-top" style="background: #f7f7f7;" [routerLink]="['/settings']">
+      <ion-col size="2">
+        <ion-icon name="options"></ion-icon>
+      </ion-col>
+      <ion-col size="10">
+        <ion-label>Ajustes</ion-label>
+        <ion-icon *ngIf="!platform.is('ios')" name="arrow-forward"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding ion-margin-top ion-hide" style="background: #f7f7f7;" [routerLink]="['/reports']">
+      <ion-col size="2">
+        <ion-icon name="stats"></ion-icon>
+      </ion-col>
+      <ion-col size="10" id="reports">
+        <ion-label>Reportes</ion-label>
+        <ion-icon *ngIf="!platform.is('ios')" name="arrow-forward"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ng-template #signin>
+    <ion-card>
+      <!-- <ion-card-header>
+        <ion-card-title></ion-card-title>
+      </ion-card-header> -->
+      <ion-card-content>
+        <ion-row>
+          <ion-col align="center">
+            <u style="font-size: 1.2em;" routerLink="/signin">Iniciar Sesión</u>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+  
+  <ion-grid class="ion-padding ion-margin-top">
+    <ion-row style="background: #f7f7f7;">
+      <ion-col size="8" class="ion-margin-left">
+        <label class="name-text" style="display: block; margin-top: 5px;">{{ nameusr }}</label>
+        <label class="mail-text" style="display: block">{{ mailusr }}</label>
+      </ion-col>
+      <ion-col size="4" (click)="logout()" class="ion-text-center">
+        <p>Cerrar Sesión</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,35 @@
+<ion-content class="ion-padding animate__animated animate__bounceInUp" style="border-radius: 1.25em; padding-top: 10% !important; height: auto; animation-duration: 0.7s !important">
+  <br><br>
+  <ion-grid align="center" style="z-index: 10;">
+    <ion-row>
+      <ion-col align="left">
+      </ion-col>
+      <ion-col>
+          <img src="{{ file }}" style="height: 100%; max-height: 200px; width: 100%">
+      </ion-col>
+      <ion-col align="right">
+      </ion-col>
+    </ion-row>
+    <ion-row align="center">
+      <ion-col size="12" style="margin-top: -20px;">
+        <h5 style="color: black">{{ name }}</h5>
+        <h4><small>₡</small> {{ precio }} <small style="font-weight: 300;">c/u</small></h4>
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row align="center">
+      <ion-col size="12" style="margin-top: -20px; background: #fafafa;">
+        <p style="color: black">{{ descr }}</p>
+      </ion-col>
+    </ion-row>
+</ion-grid>
+  <br>
+  <ion-footer>
+    <br>
+    <ion-row>
+      <ion-button (click)="closeModal()" style="width: 100%;" class="gradient-order btnapp" color="app">
+        <p style="color: white; font-weight: 500;">CERRAR</p>
+      </ion-button>
+    </ion-row>
+  </ion-footer>
+</ion-content>

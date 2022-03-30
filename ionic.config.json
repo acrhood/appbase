@@ -1,0 +1,8 @@
+{
+  "name": "Pira Express",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,102 @@
+<ion-content class="ion-padding animate__animated animate__bounceInUp" style="border-radius: 1.25em; padding-top: 10% !important; height: auto; animation-duration: 0.7s !important">
+  <ion-header>
+    <ion-toolbar class="gradient-header" color="app" style="background: #fff;">
+        <ion-buttons slot="start">
+        <ion-back-button (click)="goBack()" defaultHref="/tabs/menu"></ion-back-button>
+        </ion-buttons>
+        <ion-title slot="end">Recibo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid id="contentreceipt" style="background: #F8F8F8">
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-center">
+          <b class="ion-no-margin"> {{ nombresuc }} <!-- Nombre de comercio: --> </b><br>
+          <small class="ion-no-margin"> {{ cedulasuc }} <!--Cédula Jurídica:--></small>
+          <p class="ion-no-margin"> {{ telefonossuc }} <!--Teléfono:--> </p>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <b>Nº Recibo:</b> {{ nrecibo }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <b>Cliente:</b> {{ cliente }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <b>Fecha:</b> {{ fecha }}
+      </ion-col>
+    </ion-row>
+    <hr>
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-start">
+          <b class="ion-no-margin">Cant</b>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="ion-text-center">
+        <b class="ion-no-margin">Producto</b>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="ion-text-end">
+        <b class="ion-no-margin">Total</b>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-list>
+        <ion-item *ngFor="let item of listaordenes">
+          <ion-row style="width: 100% !important;">
+            <ion-col size="3">
+              <div class="ion-text-start">
+                <ion-note class="ion-no-margin">{{ item[1] }}</ion-note>
+              </div>
+            </ion-col>
+            <ion-col size="5">
+              <div class="ion-text-center">
+              <ion-note class="ion-no-margin">{{ item[0] }}
+              </ion-note>
+              </div>
+            </ion-col>
+            <ion-col size="4">
+              <div class="ion-text-end">
+              <ion-note class="ion-no-margin">{{ item[2] }}</ion-note>
+              </div>
+            </ion-col>
+            <ion-col size="12">
+              <section id="opciones{{ item[11] }}"></section>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+    </ion-list>
+  </ion-grid>
+  
+</ion-content>
+<ion-footer style="padding: 1em; background-color: #ffffff;">
+    <ion-toolbar>
+      <ion-row>
+        <ion-col size="7" class="ion-padding-start">
+          <b class="name-text">Subtotal:</b><br>
+          <b class="name-text">Envio:</b>
+        </ion-col>
+        <ion-col size="5" class="ion-text-right">
+          ₡ {{ subtotal }}<br>
+          ₡ {{ flete }}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="7" class="ion-padding-start">
+          <b class="name-text">Total:</b>
+        </ion-col>
+        <ion-col size="5" class="ion-text-right">
+          <span style="font-weight: 400;">₡ {{ total }}</span>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-footer>  

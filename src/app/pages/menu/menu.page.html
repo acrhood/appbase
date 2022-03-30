@@ -1,0 +1,262 @@
+<ion-header>
+  <ion-toolbar class="gradient-header" color="app" style="background: #fff;">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-xs="2" size-sm="2" size-md="1">
+          <section style="background: #dadada; border-radius: 0 2.5em 2.5em 0; margin-left: -15px;">
+            <ion-menu-button><img src="../../../assets/icon/avatar.svg"
+                style="width: 90%; margin: 0 auto; border-radius: 50%; padding: 2px; position: relative; margin-left: 18px;"
+                alt=""></ion-menu-button>
+          </section>
+        </ion-col>  
+        <ion-col size-xs="8" size-sm="8" size-md="10">
+          <div class="search" align="center">
+            <ion-input type="text" (keyup)="sproduct()" [(ngModel)]="search" role="search" clearInput id="search" placeholder="    Buscar"
+              required></ion-input>
+          </div>
+        </ion-col>
+        <ion-col size-xs="2" size-sm="2" size-md="1" [routerLink]="['/order']">
+            <img class="cart-icon" src="../../../assets/icon/cart.svg" style="margin: 10px auto !important;">
+            <ion-badge class="animate__animated animate__headShake" style="margin-top: 5px; margin-left: 11px; color: black" id="badgeorders"></ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid style="padding-bottom: 0;" class="ion-hide" id="gridTable">
+      <ion-list class="app">
+        <ion-item-sliding color="app">
+          <ion-item class="ion-text-center" color="app">
+            <ion-label style="font-size: 1.2em; color: #fff;" id="nmesa"></ion-label>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option color="btnapp" (click)="deleteTable(ntable)">Borrar</ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </ion-grid>
+    <ion-grid class="gradient-header" style="width: 100%; padding-top: 0; height: 90%;">
+      <!-- <ion-slides pager="true" [options]="slideMenuopt" class="ion-padding" align="center"
+        style="padding: 0 16px 0 16px">
+        <ion-slide *ngFor="let item of listatipoprods" (click)="onClick(item[0])"
+          style="width: auto !important; padding: 3%;">
+          <ion-label style="font: 0.5em; font-weight: 400; color: black;">{{ item[1] }}</ion-label>
+        </ion-slide>
+      </ion-slides> -->
+      <ion-segment color="danger">
+        <ion-segment-button *ngFor="let item of listatipoprods" (click)="onClick(item[0])" value="{{ item[1] }}">
+          <ion-label>{{ item[1] }}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <!-- START SKELETON -->
+      <div *ngIf="!listatipoprods">
+        <ion-row>
+          <ion-col size="6">
+            <ion-skeleton-text animated style="height: 50px;"></ion-skeleton-text>
+          </ion-col>
+          <ion-col size="6">
+            <ion-skeleton-text animated style="height: 50px;"></ion-skeleton-text>
+          </ion-col>
+        </ion-row>
+      </div>
+      <!-- END SKELETON -->
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ion-row style="height: 40px;">
+      <!-- <ion-col size="2" align="center">
+        <ion-icon style="margin-top: 12px; font-size: 1.2em; display: none;" name="options-outline"
+        (click)="fPopover( $event )"></ion-icon>
+      </ion-col> -->
+      <ion-col size="12" align="center" [routerLink]="['/sucursales']" class="ion-padding"
+        style="font-weight: 300; font-size: 0.9em; color: #505050; background: #fafafa;">
+        <ion-col>Comprar en</ion-col>
+        <ion-col>
+          <ion-icon name="caret-forward-outline"></ion-icon>
+        </ion-col>
+        <ion-col><b>{{ nomSuc}}</b></ion-col>
+      </ion-col>
+      <!-- <ion-col align="center" class="ion-padding" size="8" style="font-weight: 300; font-size: 0.8em; color: #505050;">Más de {{ results }} resultados</ion-col> -->
+      <!-- <ion-col align="center" class="ion-padding" size="4" style="font-weight: 300; font-size: 0.9em; color: #505050; background: #f8f8f8;" (click)="fPopover( $event )">Filtrar <ion-icon name="arrow-dropdown"></ion-icon></ion-col> -->
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid style="margin-top: -2.5px; width: 100%;">
+    <ion-grid class="animate__animated animate__bounceIn">
+      <ion-slides *ngIf="listacupones.length > 0" pager="true" [options]="slideOpts" style="height: 180px;">
+        <ion-slide *ngFor="let item of listacupones">
+          <img [id]="item[0]" [src]="item[4]" (click)="verDetallecupon( item[0] )" style="background-size: contain;"
+          alt="Cupón de descuento">
+          <ion-row class="titCupons">
+            <ion-col size="8" class="ion-align-self-center">
+              <div>
+                {{ (item[1].length>16) ? (item[1] | slice:0:16)+'..':(item[1]) }}
+              </div>
+            </ion-col>
+            <ion-col size="4" style="border-left: #ffc01fb9 1px solid" class="ion-align-self-center">
+              <div>
+                <b class="precCupon">₡{{ item[3] | number:'1.0-2' }}</b>
+              </div>
+            </ion-col>
+          </ion-row>
+          <!-- <div class="titCupons">
+            {{ (item[1].length>16) ? (item[1] | slice:0:16)+'..':(item[1]) }}
+          </div> -->
+        </ion-slide>
+      </ion-slides>
+    </ion-grid>
+
+    <ion-segment color="danger" value="all">
+      <ion-segment-button *ngIf="optshow == 1" (click)="opttipo" value="all">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button *ngFor="let cat of listacategorias" (click)="buscarCategoria(cat[0])" value="{{ cat[1] }}">
+        <ion-label>{{ cat[1] }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <!-- <ion-slides scrollbar="true" [options]="slideCategories" style="margin-top: 15px; display: none;"> -->
+      <!-- Mostrar con texto -->
+      <!-- <ion-slide *ngFor="let cat of listacategorias" (click)="buscarCategoria(cat[0])"
+        style="width: auto !important; padding: 3%; background: #fafafa;">
+        <ion-label style="font: 0.5em; font-weight: 400; color: black;">{{ cat[1] }}</ion-label>
+      </ion-slide> -->
+      <!-- Mostrar con imagenes -->
+      <!-- <ion-slide>
+        <div size="2" align="center" *ngFor="let cat of listacategorias">
+          <img [src]="cat[2]" style="padding: 3%; width: 90%;" (click)="buscarCategoria(cat[0])">
+          <ion-label style="font-size: 0.8em; font-weight: 250;">{{ cat[1] }}</ion-label>
+        </div>
+      </ion-slide> -->
+    <!-- </ion-slides> -->
+  </ion-grid>
+  <ion-grid>
+    <div [ngSwitch]="tipo">
+      <ion-list *ngSwitchCase="1">
+        <ion-row>
+          <ion-col *ngFor="let item of listacomidas" size-xs="6" size-sm="6" size-md="4" style=" border: 1px solid #fafafa;">
+            <ion-card-header style="height: auto; max-height: 200px; min-height: auto;">
+              <ion-img [src]="item[4]" alt="" style="margin: 0 auto; padding: 2%; width: auto; height: 180px !important;"
+                (click)="verDetalle(item[0])">
+              </ion-img>
+              <ion-badge style="margin-top: -15px; position: absolute; z-index: 999" *ngIf="item[8] == 0" color="warning">Agotado</ion-badge>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-row>
+                <ion-col size="12">
+                  <span style="font-weight: 300;" (click)="verDetalle(item[0])">{{ (item[1].length>16) ? (item[1] | slice:0:16)+'..':(item[1]) }}</span>
+                </ion-col>
+                <ion-col size="12" style="margin-top: -15px;">
+                  <p style="font-weight: 400;"><label
+                      style="margin-bottom: 15px !important; font-size: 1em">₡</label>{{ item[3] | number:'1.0-2' }}</p>
+                </ion-col>
+                <!-- <ion-col size="12" style="margin-top: -10px;"> -->
+                  <!-- COMMENT <ion-chip color="{{item[7] == 2 || item[7] == 0 ? 'dark' : 'success'}}" align="center" -->
+                    <!-- <ion-chip color="{{item[7] != 0 ? 'success' : 'dark'}}" align="center" (click)="addToOrden( item[0] )" id="prod{{ item[0] }}">
+                      <ion-icon id="ico{{ item[0] }}" name="{{item[7] != 0 ? 'checkmark' : 'add'}}"></ion-icon>
+                      <ion-label id="txt{{ item[0] }}">{{item[7] != 0 ? 'Agregado' : 'Agregar'}}</ion-label>
+                    </ion-chip>
+                </ion-col> -->
+                <ion-col size="12" style="margin-top: -10px;">
+                <ion-chip color="dark" align="center" (click)="getOptions( item[0], item[1], item[4] )" id="prod{{ item[0] }}">
+                  <ion-icon id="ico{{ item[0] }}" name="add"></ion-icon>
+                  <ion-label id="txt{{ item[0] }}">Agregar</ion-label>
+                  &nbsp;&nbsp;<ion-badge color="btnapp" *ngIf="item[7] > 0">{{item[7] != 0 ? item[7] : 0}}</ion-badge>
+                </ion-chip>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-col>
+          <!-- START SKELETON -->
+          <div *ngIf="!listacomidas || !listabebidas">
+            <ion-grid style="margin-top: -30px; width: 100%;">
+              <ion-grid>
+                <ion-slides pager="true" [options]="slideOpts" style="height: 180px;">
+                  <ion-slide>
+                    <ion-skeleton-text animated style="height: 170px !important;"></ion-skeleton-text>
+                  </ion-slide>
+                </ion-slides>
+              </ion-grid>
+              <ion-slides scrollbar="true" [options]="slideCategories" style="margin-top: 15px;">
+                <ion-row style="margin-left: 5%; width: 90%">
+                  <ion-col size="3" *ngFor="let item of [1,2,3,4]">
+                    <ion-avatar>
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-avatar>
+                  </ion-col>
+                </ion-row>
+              </ion-slides>
+            </ion-grid>
+            <ion-grid>
+            <ion-row>
+            <ion-col *ngFor="let item of [1,2,3,4,5,6]" size="6" style=" border: 1px solid #fafafa;">
+              <ion-card-header style="height: auto; max-height: 200px; min-height: auto;">
+                <ion-skeleton-text animated  style="height: 100px !important;"></ion-skeleton-text>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-row>
+                  <ion-col size="12">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                  </ion-col>
+                  <ion-col size="12" style="margin-top: -15px;">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                  </ion-col>
+                  <ion-col size="12" style="margin-top: -10px;">
+                    <ion-skeleton-text animated style="margin-left: 10%; width: 80%; height: 30px; border-radius: 2.5em;"></ion-skeleton-text>
+                  </ion-col>
+                </ion-row>
+              </ion-card-content>
+            </ion-col>
+            </ion-row>
+            </ion-grid>
+          </div>
+          <!-- END SKELETON -->
+        </ion-row>
+      </ion-list>
+      <ion-list *ngSwitchCase="2">
+        <ion-row>
+          <ion-col *ngFor="let item of listabebidas" size-xs="6" size-sm="6" size-md="4" style=" border: 1px solid #fafafa;">
+            <ion-card-header style="height: 200px; max-height: 200px; min-height: auto;">
+              <ion-img [src]="item[4]" alt="" style="margin: 0 auto; padding: 2%; width: auto; height: 180px; max-height: 180px !important;"
+                (click)="verDetalle(item[0])"></ion-img>
+                <ion-badge style="margin-top: -15px; position: absolute; z-index: 999" *ngIf="item[8] == 0" color="warning">Agotado</ion-badge>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-row>
+                <ion-col size="12">
+                  <span style="font-weight: 300;" (click)="verDetalle(item[0])">{{ (item[1].length>16) ? (item[1] | slice:0:16)+'..':(item[1]) }}</span>
+                </ion-col>
+                <ion-col size="12" style="margin-top: -15px;">
+                  <p style="font-weight: 400;"><label
+                      style="margin-bottom: 15px !important; font-size: 1em">₡</label>{{ item[3] | number:'1.0-2' }}</p>
+                </ion-col>
+                <ion-col size="12" style="margin-top: -10px;">
+                <ion-chip color="dark" align="center" (click)="getOptions( item[0], item[1], item[4] )" id="prod{{ item[0] }}">
+                  <ion-icon id="ico{{ item[0] }}" name="add"></ion-icon>
+                  <ion-label id="txt{{ item[0] }}">Agregar</ion-label>
+                  &nbsp;&nbsp;<ion-badge color="btnapp" *ngIf="item[7] > 0">{{item[7] != 0 ? item[7] : 0}}</ion-badge>
+                </ion-chip>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="dots" loadingText="Cargando productos...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </ion-grid>
+
+  <!-- fab placed to the bottom end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="scanner" class="ion-hide">
+    <ion-fab-button (click)="scanTable()">
+      <ion-icon name="arrow-forward-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

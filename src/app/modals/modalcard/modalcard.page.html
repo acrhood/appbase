@@ -1,0 +1,36 @@
+<ion-content class="ion-padding">
+  <h4>Elige método de pago</h4>
+  <div class="ion-padding">
+    <ion-slides scrollbar="true" [options]="slideOpts">
+      <ion-slide *ngFor="let item of lcards" (click)="chooseCard( item[0], item[3] )">
+        <div align="left" class="addressfield">
+          <p class="addresstit">•••• •••• •••• {{ item[1] }}</p>
+          <img src="../../../assets/icon/{{ item[5] }}.svg" style="width: 30%; margin-top: -5px;">
+          <p class="addressbody">{{ item[2] }}</p>
+          <!-- <p style="color: #929292; font-weight: 300; font-size: 16px;">Predeterminada</p> -->
+        </div>
+      </ion-slide>
+      <div *ngIf="!lcards">
+        <ion-slide *ngFor="let item of lcards">
+          <div align="left" class="addressfield">
+            <ion-skeleton-text animated>•••• •••• •••• ••••</ion-skeleton-text>
+            <ion-skeleton-text style="height: 40px; width: 30%;" animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </div>
+        </ion-slide>
+      </div>
+    </ion-slides>
+  </div>
+  <ion-card-content align="center">
+    <ion-grid>
+      <ion-row [routerLink]="['/cards']" (click)="closeModal()">
+        <ion-col size="2" align="center">
+          <img src="../../../assets/icon/cogs.svg" width="50%">
+        </ion-col>
+        <ion-col size="10" align="left">
+          <a style="font-size: 16px; text-decoration: none; color: primary;">Modificar métodos de pago</a>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-content>

@@ -1,0 +1,90 @@
+
+<ion-content class="ion-padding animate__animated animate__slideInUp" style="animation-duration: 0.3s !important;">
+    <ion-header style="box-shadow: none">
+        <ion-toolbar class="gradient-header" color="app" style="background: #fff;">
+            <ion-buttons slot="start">
+                <ion-back-button defaultHref="/{{ route }}" (click)="dismiss()"></ion-back-button>
+            </ion-buttons>
+            <ion-title [routerLink]="['/menu']">
+                <!-- <img src="../../../assets/icon/logo.svg" style="width: auto;height: 30px;margin: 0 auto;margin-top: 5px;"> -->
+            </ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-grid>
+        <!-- <p class="ion-no-margin" style="font-size: 1.5em;"> {{ nombre }} </p> -->
+        <ion-row *ngIf="fileslength == 1">
+            <ion-img *ngIf="fileext != 'mp4'" src="{{ file }}" alt="" style="margin: 0 auto; padding: 5% 10% 10% 10%; width: 100%; height: 400px; background: transparent;"></ion-img>
+            <video *ngIf="fileext == 'mp4'" controls style="width: 100%;">
+                <source src="{{ file }}" type="video/mp4">
+            </video>
+        </ion-row>
+        <p class="ion-no-margin" style="font-size: 1.5em;"> {{ nombre }} </p>
+        <ion-grid *ngIf="fileslength > 1">
+            <ion-slides pager="true" [options]="slideOpts">
+                <ion-slide *ngFor="let item of listaimgs">
+                    <ion-img *ngIf="item[1] != 'mp4'" [src]="item[0]" alt=""></ion-img>
+                    <video *ngIf="item[1] == 'mp4'" controls="controls" preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline" class="videoPlayer" style="width: 100%; margin-top: 15%">
+                        <source [src]="item[0]" type="video/mp4">
+                    </video>
+                </ion-slide>
+            </ion-slides>
+        </ion-grid>
+        <ion-row>
+            <ion-col size="6" align="center">
+                <label style="margin-bottom: 15px !important; font-size: 1em">₡</label>
+                <span style="font-size: 2em;">{{ tprecio | number:'1.0-2' }}</span>
+                <span style="display:none">{{ precio }}</span>
+            </ion-col>
+            <ion-col size="12" style="position: absolute; z-index: 1000; margin-top: -60px;">
+                <div [(ngModel)]="isfav" *ngIf="isfav != 1" (click)="setfavorito()" id="favorito" align="right" ngDefaultControl>
+                    <ion-icon class="animate__animated animate__rubberBand" style="font-size: 2.4em; color: #fff; background: rgba(0,0,0,0.1); padding: 1.2%; border-radius: 50%; margin-right: 15%" name="heart-outline"></ion-icon>
+                </div>
+                <div [(ngModel)]="isfav" *ngIf="isfav == 1" (click)="setfavorito()" id="favorito" align="right" ngDefaultControl>
+                    <ion-icon class="animate__animated animate__rubberBand" style="font-size: 2.4em; color: #e93535; background: rgba(0,0,0,0.1); padding: 1.2%; border-radius: 50%; margin-right: 15%" name="heart"></ion-icon>
+                </div>
+            </ion-col>
+            <ion-col class="ion-hide" size="6">
+                <div class="quantity-selector">
+                    <div class="product-minus-button quantity-button"  (click)="restoCant()"><ion-icon class="iconcant" name="remove-outline"></ion-icon></div>
+                    <input type="number" class="quantity-selector-field" (blur)="inputCant()" id="cant" value="1" data-max="2" #cant>
+                    <div class="product-plus-button quantity-button" (click)="plusCant()"><ion-icon class="iconcant" name="add-outline"></ion-icon></div>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row> 
+        <!-- <ion-col offset="6" size="4" class="ion-margin-end" align="center">
+            <ion-badge color="light" style="display: inline;"> 1 </ion-badge>&nbsp;<p style="font-weight: 300;display: inline;">en carrito</p>
+        </ion-col> -->
+        </ion-row>
+        <ion-row><br>
+            <!-- (click)="addToOrden( idprod )" -->
+            <ion-button (click)="getOptions( idprod, nombre, img )" style="width: 100%;" class="gradient-order btnapp" color="app">
+                <p style="color: white; font-weight: 500;">AGREGAR AL CARRITO</p>
+            </ion-button>
+        </ion-row><br>
+        <ion-card-content class="ion-hide" style="background: #f7f7f7;">
+        <p style="font-weight: 500">Opciones de producto</p>
+        <ion-grid *ngFor="let item of listDetailProduct">
+            <ion-row class="ion-margin-bottom">
+                <ion-col size="12" class="ion-text-left">
+                    <ion-label>{{ item[2] }}</ion-label>
+                </ion-col>
+            </ion-row>
+            <ion-radio-group id="parentnode" value="">
+                <ion-row class="ion-margin-start" id="options{{ item[0] }}"></ion-row>
+            </ion-radio-group>
+        </ion-grid>
+        </ion-card-content><br>
+        <!-- <ion-row>
+            <ion-card-content>
+                <p style="font-weight: 300; color: #525252;" align="left">Entrega aprox.: <b>de 24 a 48</b> horas hábiles para entrega con Correos de Costa Rica</p>
+            </ion-card-content>
+        </ion-row> -->
+        <ion-row>
+            <ion-card-content style="background: #f7f7f7; width: 100%;">
+                <p>Descripción del producto</p>
+                <label style="font-weight: 300; color: #929292;"> {{ descr }}</label>
+            </ion-card-content>
+        </ion-row>
+    </ion-grid>
+</ion-content>

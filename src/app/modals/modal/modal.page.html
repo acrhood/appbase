@@ -1,0 +1,34 @@
+<ion-content class="ion-padding">
+  <h4>Elige tu ubicación</h4>
+  <label class="addressbody">Las opciones y velocidades de envío pueden variar según la dirección</label>
+  <div class="ion-padding">
+    <ion-slides scrollbar="true" [options]="slideOpts">
+      <ion-slide *ngFor="let item of ldirections" id="{{ item[0] }}" (click)="chooseDirection(item[0])">
+        <div align="left" class="addressfield">
+          <p class="addresstit">{{ item[1] }}</p>
+          <p class="addressbody">{{ item[2] }}</p>
+        </div>
+      </ion-slide>
+      <div *ngIf="!ldirections">
+        <ion-slide>
+          <div align="left" class="addressfield">
+            <ion-skeleton-text style="height: 30px; width: 60%;" animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </div>
+        </ion-slide>
+      </div>
+    </ion-slides>
+  </div>
+  <ion-card-content align="center">
+    <ion-grid>
+      <ion-row [routerLink]="['/directions']" (click)="closeModal()">
+        <ion-col size="2" align="center">
+          <img src="../../../assets/icon/cogs.svg" width="50%">
+        </ion-col>
+        <ion-col size="10" align="left">
+          <a style="font-size: 16px; text-decoration: none; color: primary;">Modificar direcciones en envío</a>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-content>

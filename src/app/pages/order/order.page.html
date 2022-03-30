@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar class="gradient-header" color="app">
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="https://food.pipecr.com/assets/imgs/avatar.svg" style="width: 100%; margin: 0 auto; border-radius: 50%;">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title [routerLink]="['/menu']" align="right">
+      <!-- <img src="../../../assets/icon/logo.svg" style="width: auto;height: 30px;margin: 0 auto;margin-top: 5px;"> -->
+      Carrito de compras
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-row>
+    <ion-col align="center">
+      <ion-badge [routerLink]="['/menu']" style="font-size: 14px; font-weight: 400; padding: 2%;" color="light">Seguir comprando</ion-badge>
+    </ion-col>
+  </ion-row><br>
+  <ion-grid style="padding: 0 !important;">
+    <ion-list id="lordenes" align-items-center style="padding: 0 !important;">
+      <section *ngFor="let item of listaOrdenes" style="padding: 0 !important;">
+        <ion-item-sliding style="padding: 0 !important;">
+          <ion-item style="padding: 0 !important;">
+            <ion-avatar style="width: 50px; padding: 0 2% 0 0;">
+              <img style="max-width: 120% !important; width: 120%;" [src]="item[3]">
+            </ion-avatar>
+            <ion-row style="width: 100%;">
+              <ion-col (click)="openDetail( item[7], item[3], item[1] )" size="6" align-items-center>
+                <ion-label style="font-weight: 300;">{{ item[1] }}</ion-label>
+                <ion-badge style="display: inline-block; background-color: transparent !important; color: #000; font-weight: 500; font-size: 0.9em;" id="totitem{{ item[0] }}">₡{{ item[4]*item[5] | number:'1.0-2' }}</ion-badge>
+                <ion-badge *ngIf="item[6] != null && item[6] != 0" style="display: inline-block; background-color: transparent !important; color: #2dd36f; font-weight: 500; font-size: 0.9em;" id="textra{{ item[0] }}">+₡{{ item[6] }}</ion-badge>
+                <!-- <ion-label style="display: inline-block; margin-top: -0.5em; color: #000; font-weight: 500; font-size: 0.9em;">₡ {{ getTot(item[5], item[6]) }}</ion-label> -->
+              </ion-col>
+              <ion-col size="6">
+                <div class="quantity-selector">
+                  <div class="product-minus-button quantity-button" (click)="restoCant( item[0], item[5] )"><ion-icon class="iconcant" name="remove-outline"></ion-icon></div>
+                  <input type="number" class="quantity-selector-field" id="cant{{ item[0] }}" value="{{ item[4] }}" data-max="2" #cant disabled>
+                  <div class="product-plus-button quantity-button" (click)="plusCant( item[0], item[5] )"><ion-icon class="iconcant" name="add-outline"></ion-icon></div>
+                </div>
+              </ion-col>
+              <ion-col size="1" style="display: none;">
+                <div class="quantity-button" (click)="addComent( item[0] )"><ion-icon class="iconcant" name="ellipsis-vertical-outline"></ion-icon></div>
+              </ion-col>
+              <section style="width: 100%; margin-top: -5px;" id="options{{ item[0] }}"></section>
+            </ion-row>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option color="danger" (click)="eliminarOrden( item[0] )">
+              <ion-icon style="font-size: 18px" class="ion-padding" name="trash"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+        <br>
+      </section>
+      <!-- START SKELETON -->
+      <section *ngIf="!listaOrdenes" style="padding: 0 !important;">
+        <ion-item *ngFor="let item of [1,2,3]">
+          <ion-skeleton-text animated style="height: 70px; width: 90%;"></ion-skeleton-text>
+          <ion-col size="5" align-items-center>
+            <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-col>
+          <ion-col size="2">
+            <ion-skeleton-text animated style="height: 30px; border-radius: 2.5em;"></ion-skeleton-text>
+          </ion-col>
+          <ion-col size="2">
+            <ion-skeleton-text animated style="height: 30px; border-radius: 2.5em;"></ion-skeleton-text>
+          </ion-col>
+        </ion-item>
+        <br>
+      </section>
+      <!-- END SKELETON -->
+    </ion-list>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-grid class="ion-padding">
+    <ion-row class="gradient-order" style="border-radius: 0.5em;" id="ordenar" [routerLink]="routerLink">
+      <ion-col size="4" style="padding: 1% !important" align="center">
+        <p style="color: white; font-weight: 500;">{{ totcant }}</p>
+      </ion-col>
+      <ion-col size="4" style="padding: 1% !important" align="center">
+        <p style="color: white; font-weight: 500;">ORDENAR</p>
+      </ion-col>
+      <ion-col size="4" style="padding: 1% !important" align="center">
+        <p style="color: white; font-weight: 500;">₡ <span id="tot">{{ totalOrder }}</span></p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <div class="btnempty" align="center" (click)="vaciarCarrito()"> Vaciar canasta </div>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94.76 45">
+    <defs>
+        <style>
+            .cls-1,.cls-2{fill:none;stroke:#000000;stroke-linejoin:round;stroke-width:6px;}
+            .cls-2{stroke-linecap:round;}
+        </style>
+    </defs>
+    <title>cart_3</title>
+    <g id="Capa_2" data-name="Capa 2">
+        <g id="Capa_1-2" data-name="Capa 1">
+            <polyline class="cls-1" points="6.02 1.29 25.49 42 73.25 42 88.63 1.29"/>
+            <line class="cls-2" x1="9.76" y1="10.96" x2="3" y2="14.22"/>
+            <line class="cls-2" x1="85" y1="10.96" x2="91.76" y2="14.22"/>
+        </g>
+    </g>
+</svg>

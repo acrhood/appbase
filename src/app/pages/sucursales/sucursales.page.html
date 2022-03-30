@@ -1,0 +1,233 @@
+<ion-card-content *ngIf="walkState == 1" class="ion-no-padding">
+  <ion-row class="ion-no padding">
+    <img src="https://food.pipecr.com/assets/img/sucursales.png" aria-label="Bienvenido" style="width: 100%;">
+    <!-- <img src="../../../assets/icon/costarica.svg" style="position: absolute; z-index: -1; margin-top: 9%"> -->
+    <!-- <p style="font-size: 2em">Bienvenido a</p>
+    <p style="font-size: 3em">Pira, desde 1981</p>
+    <p style="margin-top: -5px;">selecciona la sucursal donde desees realizar la compra</p> -->
+  </ion-row>
+  <div class="search ion-padding" style="width: 100%;" align="center">
+    <ion-input style="background: rgba(0,0,0,0.1);" type="text" role="search" clearInput id="search" placeholder="    Buscar" required></ion-input>
+  </div>
+
+  <!-- <ion-grid> -->
+    <!-- <ion-row>
+      <ion-col *ngFor="let item of listSucursales" size="12" align="center" (click)="selectSucursal(item[0])"
+      [ngStyle]="{'background-image': 'url('+ item[20] +')'}"
+                                       style="background-color: rgba(0,0,0,0.6);
+                                              background-blend-mode: multiply;
+                                              background-size: cover;
+                                              height: 150px;
+                                              padding: 5%;
+                                              margin-bottom: 5px;" [routerLink]="['/menu']">
+        <p style="color: white; font-size: 1.2em; font-weight: 500;">{{ item[1] }}</p>
+        <ion-label style="color: white;">{{ item [18] }}</ion-label><br>
+        <ion-label style="color: white;"> {{ item[19] }}</ion-label>
+      </ion-col>
+    </ion-row> -->
+          <!-- START SKELETON -->
+          <section *ngIf="!listSucursales" style="padding: 0 !important;">
+            <ion-item class="ion-no-border" *ngFor="let item of [1,2,3]">
+              <ion-col size="4" align-items-center>
+                <ion-skeleton-text animated style="height: 70px; width: 90%;"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="6" align-items-center>
+                <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </ion-col>
+              
+              <ion-col size="2">
+                <ion-skeleton-text animated style="height: 30px; border-radius: 2.5em;"></ion-skeleton-text>
+              </ion-col>
+            </ion-item>
+            <br>
+          </section>
+          <!-- END SKELETON -->
+          <section>
+            <ion-list>
+              <ion-item class="item-native ion-margin-top" *ngFor="let item of listSucursales" (click)="selectSucursal(item[0])" [routerLink]="['/menu']">
+                  <ion-thumbnail style="height: 80px !important; width: 80px !important;" slot="start">
+                    <img src="{{ item[20] }}">
+                  </ion-thumbnail>
+                  <ion-label>
+                    <h3>{{ item[1] }}</h3>
+                    <p>{{ item [18] }}</p>
+                    <p> {{ item[19] }}</p>
+                  </ion-label>
+                  <div slot="end">
+                    <ion-icon style="font-size: 2em;" class="btnapp" name="arrow-forward-circle-outline"></ion-icon>
+                  </div>
+              </ion-item>
+            </ion-list>
+          </section>
+    <br>
+  <!-- </ion-grid> -->
+</ion-card-content>
+
+<ion-content *ngIf="walkState == 0 || walkState == null">
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide>
+      <ion-row>
+        <ion-col size="12">
+          <img src="https://food.pipecr.com/assets/img/walk/intro.png" alt="">
+        </ion-col>
+        <ion-col size="12">
+          <h1 class="animate__animated animate__rubberBand">Hola!</h1>
+          <p>
+            Desliza a la izquierda para un paseo rápido por nuestra aplicación!
+          </p>
+        </ion-col>
+        <!-- <ion-col size="12">
+          <a href="/home">
+            Back
+          </a>
+        </ion-col> -->
+      </ion-row>
+    </ion-slide>
+    <ion-slide>
+      <ion-row>
+        <ion-col size="12">
+          <img src="https://food.pipecr.com/assets/img/walk/menu.svg" alt="">
+        </ion-col>
+        <ion-col size="12">
+          <h1 class="animate__animated animate__rubberBand">Menú</h1>
+          <p>
+            Te lleva al menú donde podrás encontrar una amplia lista para seleccionar todos los <b>productos</b> que deseas adquirir.
+          </p>
+        </ion-col>
+        <!-- <ion-col size="12">
+          <a href="/home">
+            Back
+          </a>
+        </ion-col> -->
+      </ion-row>
+    </ion-slide>
+    <ion-slide>
+      <ion-row>
+        <ion-col size="12">
+          <img src="https://food.pipecr.com/assets/img/walk/carrito.svg" alt="">
+        </ion-col>
+        <ion-col size="12">
+          <h1 class="animate__animated animate__rubberBand">Carrito</h1>
+          <p>
+            Puedes visualizar los productos que hayas agregado al carrito para crear una <b>orden</b>.
+          </p>
+        </ion-col>
+        <!-- <ion-col size="12">
+          <a href="/home">
+            Back
+          </a>
+        </ion-col> -->
+      </ion-row>
+    </ion-slide>
+    <ion-slide>
+      <ion-row>
+        <ion-col size="12">
+          <img src="https://food.pipecr.com/assets/img/walk/favorito.svg" alt="">
+        </ion-col>
+        <ion-col size="12">
+          <h1 class="animate__animated animate__rubberBand">Favorito</h1>
+          <p>
+            Puedes agregar a favoritos todos los productos que más te gusten y accederlos más tarde para realizar tus compras de manera <b>más rápida</b>.
+          </p>
+        </ion-col>
+        <!-- <ion-col size="12">
+          <a href="/home">
+            Back
+          </a>
+        </ion-col> -->
+      </ion-row>
+    </ion-slide>
+    <ion-slide>
+      <ion-row>
+        <ion-col size="12">
+          <img src="https://food.pipecr.com/assets/img/walk/user.svg" alt="">
+        </ion-col>
+        <ion-col size="12">
+          <h1 class="animate__animated animate__rubberBand">Mi Cuenta</h1>
+          <p>
+            Visualiza y configura los datos de tu perfil de <b>usuario</b>.
+          </p>
+        </ion-col>
+        <!-- <ion-col size="12">
+          <a href="/home">
+            Back
+          </a>
+        </ion-col> -->
+      </ion-row>
+    </ion-slide>
+    <ion-slide>
+      <ion-row>
+        <ion-col size="12">
+          <img src="https://food.pipecr.com/assets/img/walk/payment.svg" alt="">
+        </ion-col>
+        <ion-col size="12">
+          <h1 class="animate__animated animate__rubberBand">Pago</h1>
+          <p>
+            Agrega un método de pago que sea <b>VISA</b> o <b>MASTER CARD</b> para realizar tus compras.
+          </p>
+        </ion-col>
+        <!-- <ion-col size="12">
+          <a href="/home">
+            Back
+          </a>
+        </ion-col> -->
+      </ion-row>
+    </ion-slide>
+    <ion-slide>
+      <ion-row>
+        <ion-col size="12">
+          <img src="https://food.pipecr.com/assets/img/walk/direccion.svg" alt="">
+        </ion-col>
+        <ion-col size="12">
+          <h1 class="animate__animated animate__rubberBand">Entrega</h1>
+          <p>
+            Agrega una dirección donde deseas que sean <b>entregados</b> los pedidos que realices de manera express.
+          </p>
+        </ion-col>
+        <!-- <ion-col size="12">
+          <a href="/home">
+            Back
+          </a>
+        </ion-col> -->
+      </ion-row>
+    </ion-slide>
+    <ion-slide>
+      <ion-row>
+        <ion-col size="12">
+          <img src="https://food.pipecr.com/assets/img/walk/historial.svg" alt="">
+        </ion-col>
+        <ion-col size="12">
+          <h1 class="animate__animated animate__rubberBand">Historial de Compra</h1>
+          <p>
+            Podrás visualizar el <b>historial de tus compras</b> y consultar el <b>estado</b> de tus pedidos.
+          </p>
+        </ion-col>
+        
+        <ion-fab vertical="bottom" horizontal="end">
+          <a href="/sucursales" (click)="changewalkState()">
+            <ion-fab-button color="danger">
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </ion-fab-button>
+          </a>
+        </ion-fab>
+        <!-- <ion-col size="12">
+          <ion-col size="1">
+            <ion-checkbox color="danger" id="showagain" (click)="changewalkState()"></ion-checkbox>
+          </ion-col>
+          <ion-col class="showagain">
+            <ion-label for="showagain">No mostrar de nuevo</ion-label>
+          </ion-col>
+        </ion-col> -->
+        <!-- <ion-col size="12" class="btnfinish">
+          <a href="/sucursales" (click)="changewalkState()">
+            <ion-chip style="width: 80%; padding: 20px;" color="danger">
+            <ion-label style="font-size: 1.6em;">Continuar</ion-label>
+          </ion-chip>
+          </a>
+        </ion-col>  -->
+      </ion-row>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

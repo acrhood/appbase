@@ -1,0 +1,33 @@
+.app {
+    background: var(--ion-color-insideapp) !important;
+    color: #F8F8F8 !important;
+}
+
+#contentreceipt {
+    position: relative;
+    height: auto;
+    width: 100%;
+    color: #686868;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0.5px 0px,rgba(0, 0, 0, 0.2) 0px 10px 8px -5px;
+    // box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 2px 0px, rgba(0, 0, 0, 0.2) 0px 8px 8px -5px;
+    font: normal normal normal 16px/17px Helvetica, Arial, sans-serif;
+}
+
+#contentreceipt:after {
+    background-position: 0px 0px;
+    bottom: -8px;
+    height: 10px;
+    left: 0px;
+    position: absolute;
+    width: 100%;
+    content: ' ';
+    background: rgba(0, 0, 0, 0) url(https://static.licdn.com/scds/common/u/images/apps/payments/textures/texture_paper_zigzag_288x18_v1.png) repeat-x scroll 0px 0px / auto padding-box border-box;
+}/*#contentreceipt:after*/
+
+.list-md{
+    background: none !important;
+}
+
+ion-item {
+    background: transparent !important;
+}

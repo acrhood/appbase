@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col>
+        <ion-title style="padding: 2% 4%;">Digite el pin</ion-title>
+      </ion-col>
+      <ion-col align="right">
+        <ion-icon style="font-size: 1.8em; padding: 2%;" (click)="closeModal()" name="close"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-row class="ion-padding">
+    <ion-col style="background: #dfdfdf;" class="ion-margin-end">
+      <ion-input type="password" [(ngModel)]="pin1" [brmasker]="{mask: '9', type: 'num', len: 1}" #xpin1 id="k1" placeholder="0" class="ion-text-center text-code" (keyup)="validateKey(1)"></ion-input>
+    </ion-col>
+    <ion-col style="background: #dfdfdf;" class="ion-margin-end">
+      <ion-input type="password" [(ngModel)]="pin2" [brmasker]="{mask: '9', type: 'num', len: 1}" #xpin2 id="k2" placeholder="0" class="ion-text-center text-code" (keyup)="validateKey(2)"></ion-input>
+    </ion-col>
+    <ion-col style="background: #dfdfdf;" class="ion-margin-end">
+      <ion-input type="password" [(ngModel)]="pin3" [brmasker]="{mask: '9', type: 'num', len: 1}" #xpin3 id="k3" placeholder="0" class="ion-text-center text-code" (keyup)="validateKey(3)"></ion-input>
+    </ion-col>
+    <ion-col style="background: #dfdfdf;" class="ion-margin-end">
+      <ion-input type="password" [(ngModel)]="pin4" [brmasker]="{mask: '9', type: 'num', len: 1}" #xpin4 id="k4" placeholder="0" class="ion-text-center text-code" (keyup)="validateKey(4, 1)"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col align="center">
+      <p class="ion-hide" id="error_maxordenes" style="font-weight: 500; font-size: 1.5em;">
+      <label style="font-size: 0.7em; font-weight: normal;">En este momento estamos recibiendo muchos pedidos, la entrega podría tardar más de lo esperado, si desea continuar, por favor, digite el PIN de confirmación de compra, de lo contrario, cierre esta ventana para cancelar la orden.</label>
+    </p>
+      <p class="ion-hide" id="error_pin" style="font-weight: 500; font-size: 1.5em;">
+          Lo sentimos... <br>
+        <label style="font-size: 0.7em; font-weight: normal;">El PIN es incorrecto, por favor intente nuevamente</label>
+      </p>
+    </ion-col>
+  </ion-row>
+</ion-content>

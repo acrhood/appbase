@@ -1,0 +1,22 @@
+<ion-header color="app" class="app ion-padding" align="center">
+  <span>Agregar un comentario</span>
+</ion-header>
+<ion-content class="ion-padding" id="content" style="border-radius: 0.5em !important">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Comentario</ion-label>
+          <ion-textarea [(ngModel)]="comment" type="text" placeHolder="Ejm: sin papas"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+
+    </ion-row>
+  </ion-grid>
+  <ion-button color="app ion-text-capitalize" class="btnapp gradient-order" style="height: 50px;"
+              expand="block" (click)="saveComment()">
+                <p style="color: white; font-weight: 500;">Guardar</p>
+  </ion-button>
+</ion-content>

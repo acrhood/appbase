@@ -1,0 +1,155 @@
+<ion-header>
+  <ion-toolbar class="gradient-header" color="app">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/orderoptions"></ion-back-button>
+    </ion-buttons>
+    <ion-title slot="end">Realizar pago</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <h6>Detalle del compra</h6>
+    <ion-card-content style="background: #f7f7f7;">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            Productos (<span id="cantprod">{{ nproducto }}</span>):
+          </ion-col>
+          <ion-col size="6" align="right">
+            ₡ {{ subtotal }}
+          </ion-col>
+          <ion-col size="6">
+            Envío y manejo:
+          </ion-col>
+          <ion-col size="6" align="right">
+            ₡ {{ flete }}
+          </ion-col>
+          <ion-col size="6">
+            Subtotal:
+          </ion-col>
+          <ion-col size="6" align="right">
+            ₡ {{ fpaymentAmount }}
+          </ion-col>
+          <ion-col size="6">
+            <b style="font-size: 18px;">Total del pedido:</b>
+          </ion-col>
+          <ion-col size="6" align="right">
+            <b style="font-size: 18px;" color="app">₡ {{ fpaymentAmount }}</b>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row align="center">
+          <ion-col>
+            <div class="animate__animated animate__pulse">
+              <ion-avatar class="ion-margin-start">
+                <img (click)="selectOptdelivery( $event )" id="express" src="../../../assets/icon/express_.gif" alt="Express">
+              </ion-avatar>
+              <!-- <div>
+                <img (click)="selectOptdelivery( $event )" id="express" src="../../../assets/icon/express_.png" alt="Express" width=60px>
+              </div> -->
+            </div>
+            <label style="margin-left: -15%;" class="optexpress active">Express</label>
+          </ion-col>
+          <ion-col>
+            <div class="animate__animated animate__pulse" style="animation-delay: 0.2s !important;">
+              <ion-avatar class="ion-margin-start">
+                <img (click)="selectOptdelivery( $event )" id="recoge" src="../../../assets/icon/recoge_.png" alt="Recoger" width="70%">
+              </ion-avatar>
+              <label style="margin-left: -15%;" class="optrecoge">Recoger</label>
+            </div>
+          </ion-col>
+          <ion-col id="served" style="display: none;">
+            <div class="animate__animated animate__pulse" style="animation-delay: 0.5s !important;">
+              <ion-avatar class="ion-margin-start">
+                <img (click)="selectOptdelivery( $event )" id="servido" src="../../../assets/icon/servido_.png" alt="Recoger">
+              </ion-avatar>
+              <label class="optservido">Servido</label>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+
+    <div id="direcciones">
+      <h6>Dirección de envío</h6>
+      <ion-card-content style="background: #f7f7f7;" (click)="showDirections()">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="11">
+              <b id="direccion"></b>
+              <p id="otrassenas"></p> 
+            </ion-col>
+            <ion-col size="1">
+              <ion-icon name="arrow-dropright" style="margin-top: 13px; font-size: 18px;"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </div>
+
+    <h6>Información de pago</h6>
+    <ion-card-content id="infopago" style="background: #f7f7f7;">
+        <ion-grid>
+          <ion-row align="center">
+            <ion-col>
+              <section>
+                <div class="animate__animated animate__pulse" style="animation-delay: 0.8s !important;">
+                  <img (click)="changeinfopago( $event )" id="efectivo" src="../../../assets/icon/efectivo.svg" width="50%" alt="Efectivo">
+                </div>
+                <label class="optefectivo">Efectivo</label>
+              </section>
+            </ion-col>
+            <ion-col>
+              <section>
+                <div class="animate__animated animate__pulse" style="animation-delay: 1.1s !important;">
+                  <img (click)="changeinfopago( $event )" id="tarjeta" src="../../../assets/icon/tarjeta.svg" width="50%" alt="tarjeta">
+                </div>
+                <label class="opttarjeta active">Tarjeta</label>
+              </section>
+            </ion-col>
+            <ion-col *ngIf="issinpe == 1 && sinpe == 1">
+              <section>
+                <div class="animate__animated animate__pulse" style="animation-delay: 1.4s !important;">
+                  <img (click)="changeinfopago( $event )" id="sinpe" src="../../../assets/icon/sinpe.svg" width="50%" alt="sinpe">
+                </div>
+                <label class="optsinpe">SINPE Móvil</label>
+              </section>
+              <!-- <ion-button (click)="sendSMS()">
+                Enviar Pago
+              </ion-button> -->
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+
+      <ion-card-content id="tarjetas" style="background: #f7f7f7;" (click)="showCards()">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="11">
+              <p id="infoCard"></p>
+            </ion-col>
+            <ion-col size="1">
+              <ion-icon name="arrow-dropright" style="font-size: 18px;"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+      
+      <ion-row class="ion-margin-top">
+        <ion-col class="ion-margin-top">
+          <ion-button class="gradient-order btnapp"
+                      (click)="doPay()"
+                      color="app pipe-button ion-text-capitalize"
+                      expand="block"
+                      id="payment">
+                      <p style="color: white; font-weight: 500;">REALIZAR PAGO</p>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>

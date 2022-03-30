@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar class="gradient-header" color="app">
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="https://food.pipecr.com/assets/imgs/avatar.svg" style="width: 100%; margin: 0 auto; border-radius: 50%;">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title [routerLink]="['/menu']">
+      <ion-col class="ion-padding">
+        <ion-badge [routerLink]="['/menu']" style="font-size: 14px; font-weight: 400; padding: 2%;" color="light">Seguir comprando</ion-badge>
+      </ion-col>
+      <!-- <img src="../../../assets/icon/logo.svg" style="width: auto;height: 30px;margin: 0 auto;margin-top: 5px;"> -->
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ion-card *ngFor="let item of listapedidos">
+      <ion-item style="padding: 0 !important;">
+        <!-- <ion-icon name="pin" slot="start"></ion-icon> -->
+        <p><b>Nº ORDEN: </b>{{ item[6] }}</p>
+        <ion-button fill="outline" color="light" slot="end" (click)="viewreceipt( item[6] )"><span style="color: #444">VER RECIBO</span></ion-button>
+      </ion-item>
+      <ion-row>
+        <ion-col size="12" align="center" class="animate__animated animate__bounceIn" style="animation-duration: 0.3s !important; animation-delay: 0.3s !important;">
+          <ul class="ion-no-padding">
+            <li class="li">
+              <ion-icon *ngIf="item[1] == 'Pagada'" class="icon" name="bonfire-outline"></ion-icon><br>
+              <ion-icon *ngIf="item[1] != 'Pagada'" class="icon_" name="bonfire-outline"></ion-icon><br>
+            </li>
+            <li class="li">
+                <ion-icon *ngIf="item[4] != '0.00' && item[1] == 'En camino'" class="icon" name="rocket-outline"></ion-icon><br>
+                <ion-icon *ngIf="item[4] != '0.00' && item[1] != 'En camino'" class="icon_" name="rocket-outline"></ion-icon><br>
+            </li>
+            <li class="li">
+              <ion-icon *ngIf="item[1] == 'Finalizada'" class="icon" name="fast-food-outline"></ion-icon><br>
+              <ion-icon *ngIf="item[1] != 'Finalizada'" class="icon_" name="fast-food-outline"></ion-icon><br>
+            </li>
+          </ul>
+          <ion-progress-bar *ngIf="item[1] == 'Pagada'" color="danger" class="progressbar" value="0.1"></ion-progress-bar>
+          <ion-progress-bar *ngIf="item[1] == 'En camino'" color="danger" class="progressbar" value="0.5"></ion-progress-bar>
+          <ion-progress-bar *ngIf="item[1] == 'Finalizada'" color="danger" class="progressbar" value="1"></ion-progress-bar>
+        </ion-col>
+      </ion-row>
+      <ion-row align="center" style="margin-top: -10px;">
+        <ion-col size="4">
+          <small><ion-label color="danger">Preparando</ion-label></small>
+        </ion-col>
+        <ion-col size="4">
+          <small><ion-label *ngIf="item[4] != '0.00'" color="danger">Enviada</ion-label></small>
+        </ion-col>
+        <ion-col size="4">
+          <small><ion-label color="danger">Finalizada</ion-label></small>
+        </ion-col>
+      </ion-row>
+      <ion-item>
+        <ion-col align="left" class="ion-no-padding">
+          <span>{{ item[2] }}</span>
+        </ion-col>
+        <ion-col align="right" class="ion-no-padding">
+          <span>{{ item[3] }}</span>
+        </ion-col>
+      </ion-item>
+      <ion-card-content>
+        <ion-row id="detallepedido{{ item[0] }}"></ion-row>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-grid>
+        <ion-row>
+          <ion-col size="6" class="ion-text-left">
+            <span style="font-size: 1.1;"><b>ENVIO: </b></span>
+            <span style="font-size: 1.1em;">₡{{ item[4] }}</span><br>
+            <span style="font-size: 1.1;"><b>TOTAL: </b></span>
+            <span style="font-size: 1.1em;">₡{{ item[5] }}</span>
+          </ion-col>
+          <ion-col size="6" align="center">
+            <ion-button fill="outline" size="small" color="danger" style="width: 60%; font-size: 0.7em; margin-top: -5%;">{{ item[9] }}</ion-button><br>
+            <ion-button fill="outline" size="small" color="danger" style="width: 60%; font-size: 0.7em; margin-top: -3%;">{{ item[10] }}</ion-button>
+          </ion-col>
+          <!-- <ion-col align="center">
+            <ion-badge style="margin-top: 15px; font-size: 1.2em;" color="light">{{ item[1] }}</ion-badge>
+          </ion-col> -->
+        </ion-row>
+      </ion-grid>
+      </ion-card-content>
+      <!-- <ion-card-content *ngIf="item[8] != 6"> -->
+      <ion-card-content *ngIf="item[1] == 'Pagada' && item[11] == 1">
+        <ion-button class="btnapp gradient-order"
+          (click)="cancel_orden( item[7], item[0], item[8] )"
+          color="app pipe-button ion-text-capitalize"
+          expand="block"
+          id="payment">
+          <p style="color: white; font-weight: 500;">CANCELAR ORDEN</p>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+    <div *ngIf="!listapedidos">
+      <ion-card *ngFor="let item of listapedidos">
+        <ion-item style="padding: 0 !important">
+          <ion-skeleton-text slot="start" animated></ion-skeleton-text>
+          <ion-skeleton-text slot="end" animated></ion-skeleton-text>
+        </ion-item>
+        <ion-item>
+          <ion-col align="left">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-col>
+          <ion-col align="right">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-col>
+        </ion-item>
+        <ion-card-content>
+          <ion-row>
+            <ion-row style="width: 100%">
+              <ion-col size="2" align="left">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="6" align="center">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="4" align="right">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </ion-col>
+            </ion-row>
+          </ion-row>
+        </ion-card-content>
+        <ion-card-content>
+          <ion-grid>
+          <ion-row>
+            <ion-col size="6" class="ion-text-left">
+              <ion-skeleton-text animated></ion-skeleton-text>
+              <ion-skeleton-text animated></ion-skeleton-text>
+              <ion-skeleton-text animated></ion-skeleton-text>
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-col>
+            <ion-col align="center">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        </ion-card-content>
+        <ion-card-content>
+          <ion-skeleton-text animated style="height: 50px;"></ion-skeleton-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-grid>
+</ion-content>

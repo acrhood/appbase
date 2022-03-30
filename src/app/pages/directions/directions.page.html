@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar class="gradient-header" color="app">
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="https://food.pipecr.com/assets/imgs/avatar.svg" style="width: 100%; margin: 0 auto; border-radius: 50%;">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title [routerLink]="['/menu']">
+      <ion-col class="ion-padding">
+        <ion-badge [routerLink]="['/menu']" style="font-size: 14px; font-weight: 400; padding: 2%;" color="light">Seguir comprando</ion-badge>
+      </ion-col>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <h3>Direcciones</h3>
+    </ion-row>
+    <ion-label id="noDirections" class="ion-hide">No hay direcciones</ion-label>
+    <ion-card *ngFor="let item of listaDirecciones" style="box-shadow: none !important; background: #fafafa;" class="ion-padding">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="11">
+            <ion-item>
+              <ion-icon name="pin" slot="start"></ion-icon>
+              <ion-label>{{ item[1] }}</ion-label>
+              <ion-button fill="outline" color="light" slot="end" (click)="openMap( item[0] )"><span style="color: #444">VER</span></ion-button>
+            </ion-item>
+          </ion-col>
+          <ion-col size="1">
+            <div *ngIf="item[8] == 1">
+              <ion-icon name="checkmark-circle" style="font-size: 2em; margin-top: 10px; color: #128BC9;"></ion-icon>
+            </div>
+            <div *ngIf="item[8] != 1" (click)="setDefecto( item[0] )">
+              <ion-icon name="radio-button-off" style="font-size: 2em; margin-top: 10px;"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col size="12" *ngIf="item[8] > 0" align="right">
+            <ion-badge color="light">Predeterminada</ion-badge>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-card-content style="margin-top: -20px;">
+        <ion-row>
+          <ion-col size="2">
+              <ion-icon name="map"></ion-icon>
+          </ion-col>
+          <ion-col size="10">
+              {{ item[2] }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="2">
+              <ion-icon name="call"></ion-icon>
+          </ion-col>
+          <ion-col size="10">
+              {{ item[3] }}
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+      <ion-row align-items-center>
+        <ion-col>
+          <ion-button expand="block" class="btnapp" color="light" id="{{ item[0] }}" (click)="editDireccion( $event )">
+            Editar
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button expand="block" class="btnapp gradient-order" color="app" id="{{ item[0] }}" (click)="deleteDireccion( $event )">
+            Eliminar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <div *ngIf="!listaDirecciones">
+      <ion-card *ngFor="let item of [1,2,3]" style="box-shadow: none !important; background: #fafafa;" class="ion-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="11">
+              <ion-item>
+                <ion-skeleton-text animated style="height: 30px;"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text>
+                <ion-skeleton-text animated style="height: 40px;"></ion-skeleton-text>
+              </ion-item>
+            </ion-col>
+            <ion-col size="1">
+              <div>
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-card-content style="margin-top: -20px;">
+          <ion-row>
+            <ion-col size="2">
+              <ion-skeleton-text animated style="height: 30px;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="10">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="2">
+              <ion-skeleton-text animated style="height: 30px;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="10">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+        <ion-row align-items-center>
+          <ion-col>
+            <ion-skeleton-text animated style="height: 50px;"></ion-skeleton-text>
+          </ion-col>
+          <ion-col>
+            <ion-skeleton-text animated style="height: 50px;"></ion-skeleton-text>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+  </ion-grid>
+</ion-content>
+
+<ion-footer style="padding: 0.2em">
+  <ion-toolbar>
+    <ion-item [routerLink]="['/adddirection']">
+      <ion-label>
+        Agregar dirección
+      </ion-label>
+    <ion-icon name="add" slot="end"></ion-icon>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>  

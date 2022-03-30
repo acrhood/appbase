@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar class="gradient-header" color="app">
+      <ion-buttons slot="start">
+      <ion-back-button defaultHref="user"></ion-back-button>
+      </ion-buttons>
+      <ion-title slot="end">Mis Datos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ion-row>
+      <h2>Datos de la cuenta</h2>
+    </ion-row>
+    <ion-list>
+    <ion-item>
+      <ion-col>
+        <ion-label size="3" class="ion-text-right" style="font-weight: 500;">Nombre </ion-label>
+      </ion-col>
+      <ion-col size="9">
+        <ion-input [(ngModel)]="nusr" style="color: #000000;" value="{{ nameusr }}"></ion-input>
+      </ion-col>
+    </ion-item>
+    <ion-item>
+      <ion-col>
+        <ion-label size="3" class="ion-text-right" style="font-weight: 500;">Correo </ion-label>
+      </ion-col>
+      <ion-col size="9">
+        <ion-input [(ngModel)]="musr" style="color: #000000;" readonly value="{{ mailusr }}"></ion-input>
+      </ion-col>
+    </ion-item>
+    <ion-item>
+      <ion-col>
+        <ion-label size="3" class="ion-text-right" style="font-weight: 500;">Teléfono </ion-label>
+      </ion-col>
+      <ion-col size="9">
+        <ion-input [(ngModel)]="pusr" style="color: #000000;" value="{{ phoneusr }}"></ion-input>
+      </ion-col>
+    </ion-item>
+    <ion-item>
+      <ion-col>
+        <ion-label size="3" class="ion-text-right" style="font-weight: 500;">PIN </ion-label>
+      </ion-col>
+      <ion-col size="9">
+        <ion-input [(ngModel)]="piusr" [brmasker]="{mask: '9999', type: 'num', len: 4}" type="password"style="color: #000000;" value="{{ pinusr }}"></ion-input>
+      </ion-col>
+    </ion-item>
+    <ion-item>
+      <ion-col>
+        <ion-label size="3" class="ion-text-right" style="font-weight: 500;">SINPE </ion-label>
+      </ion-col>
+      <ion-col size="9">
+        <ion-select interface="action-sheet" value="{{ selectbank }}" id="usebank" [(ngModel)]="selectbank" (ionChange)="onChange( $event )" placeholder="Ninguno">
+          <ion-select-option value="0">Ninguno</ion-select-option>
+            <ion-select-option *ngFor="let item of listabancos" value="{{ item[0] }}">{{ item[1] }}</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-item>
+    <ion-item class="ion-hide">
+      <ion-col>
+        <ion-label size="3" class="ion-text-right" style="font-weight: 500;">Cédula </ion-label>
+      </ion-col>
+      <ion-col size="9">
+        <ion-input [(ngModel)]="cusr" style="color: #000000;" value="{{ cedusr }}"></ion-input>
+      </ion-col>
+    </ion-item>
+  </ion-list>
+  <ion-row>
+    <ion-col>
+      <ion-button color="app ion-text-capitalize" class="btnapp gradient-order" style="height: 50px;"
+                  expand="block" (click)="actInfo()">
+                  <p style="color: white; font-weight: 500;">ACTUALIZAR INFORMACION</p>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-hide" id="verified">
+    <ion-col class="ion-padding-start">
+      <ion-button (click)="sendEmailVerification()" color="light">
+        Reenviar correo de verificación?
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

@@ -1,0 +1,95 @@
+<br><br><br><ion-content class="ion-padding animate__animated animate__bounceInUp" style="border-radius: 1.25em; padding-top: 20% !important; height: auto; animation-duration: 0.7s !important;">
+  <ion-grid align="center" style="z-index: 10;">
+    <ion-row>
+      <ion-col align="left">
+        <div [(ngModel)]="isfav" *ngIf="isfav != 1" (click)="setfavorito()" id="favorito" align="left" ngDefaultControl>
+          <ion-icon class="animate__animated animate__rubberBand" style="font-size: 2.4em; padding: 1.4%; margin-top: -10%; border-radius: 50%;" name="heart-outline"></ion-icon>
+      </div>
+      <div [(ngModel)]="isfav" *ngIf="isfav == 1" (click)="setfavorito()" id="favorito" align="left" ngDefaultControl>
+          <ion-icon class="animate__animated animate__rubberBand" style="font-size: 2.4em; color: #e93535; padding: 1.4%; margin-top: -10%; border-radius: 50%;" name="heart"></ion-icon>
+      </div>
+      </ion-col>
+      <ion-col *ngIf="platformiOS" size="6" style="margin-top: -5%;">
+        <h5 style="color: black">{{ name }}</h5>
+      </ion-col>
+      <ion-col *ngIf="!platformiOS" style="z-index: 1000 !important;">
+        <ion-avatar style="width: 110px; height: 110px; border: 4px solid white; border-radius: 50%; margin: -20% 0% 0% 0%; position: fixed; background: rgb(17,17,17); background: radial-gradient(circle, rgba(17,17,17,1) 0%, rgba(246,246,246,1) 35%, rgba(255,255,255,0) 100%); background-attachment: fixed;">
+          <img src="{{ file }}">
+        </ion-avatar>
+        <div *ngIf="!file">
+          <ion-skeleton-text animated style="height: 70px;"></ion-skeleton-text>
+        </div>
+      </ion-col>
+      <ion-col align="right">
+        <ion-icon style="font-size: 1.8em; margin-top: -5%; border-radius: 50%;" (click)="closeModal()" name="close"></ion-icon>
+      </ion-col>
+    </ion-row>
+  <ion-row align="center">
+    <ion-col *ngIf="platformiOS" style="z-index: 1000 !important;">
+      <ion-avatar style="width: 110px; height: 110px; margin: 0 auto; border: 4px solid white; border-radius: 50%; background: rgb(17,17,17); background: radial-gradient(circle, rgba(17,17,17,1) 0%, rgba(246,246,246,1) 35%, rgba(255,255,255,0) 100%); background-attachment: fixed;">
+        <img src="{{ file }}">
+      </ion-avatar>
+      <div *ngIf="!file">
+        <ion-skeleton-text animated style="height: 70px;"></ion-skeleton-text>
+      </div>
+    </ion-col>
+    <ion-col *ngIf="!platformiOS" size="12" style="margin-top: -20px;">
+      <h5 style="color: black">{{ name }}</h5>
+    </ion-col>
+  </ion-row>
+  <ion-row style="height: 40px !important; margin-top: -10px;">
+    <ion-col size="5">
+      <h5>Cantidad: </h5>
+    </ion-col>
+    <ion-col class="ion-padding-top" size="7">
+      <div class="quantity-selector">
+        <div class="product-minus-button quantity-button"  (click)="restoCant()"><ion-icon class="iconcant" name="remove-outline"></ion-icon></div>
+        <input type="number" class="quantity-selector-field" id="quantity" value="1" data-max="2" #cant disabled>
+        <div class="product-plus-button quantity-button" (click)="plusCant()"><ion-icon class="iconcant" name="add-outline"></ion-icon></div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+  <br>
+  <ion-grid *ngFor="let item of listDetails">
+    <ion-list *ngIf="listDetails.length > 0">
+      <ion-radio-group id="parentnode" value="biff">
+      <ion-list-header *ngIf="item[3] == 1">
+        <ion-label>{{ item[2] }}</ion-label>
+      </ion-list-header>
+      <section id="options{{ item[0] }}"></section>
+      </ion-radio-group>
+      <!-- <ion-radio-group id="parentnode" value="">
+          <ion-row style="padding: 0%;" id="options{{ item[0] }}"></ion-row>
+      </ion-radio-group> -->
+    </ion-list>
+  </ion-grid>
+  <!-- START SKELETON -->
+  <!-- <div *ngIf="!listDetails">
+    <ion-grid *ngFor="let item of [1,2]">
+      <ion-row>
+          <ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text>
+      </ion-row>
+      <ion-row *ngFor="let opt of [1,2]">
+        <ion-col size="2">
+          <ion-skeleton-text animated style="height: 30px;"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="8">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="2">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div> -->
+  <!-- END SKELETON -->
+  <ion-footer>
+    <br>
+    <ion-row>
+      <ion-button (click)="placeOrder( vid )" style="width: 100%;" class="gradient-order btnapp" color="app">
+        <p style="color: white; font-weight: 500;">AGREGAR AL CARRITO</p>
+      </ion-button>
+    </ion-row>
+  </ion-footer>
+</ion-content>

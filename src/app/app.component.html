@@ -1,0 +1,134 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+        <ion-grid style="background-image: url(../assets/icon/menub.svg); background-repeat: no-repeat;">
+          <ion-row style="margin-top: 40px;">
+              <ion-col size="12" align="center" class="animate__animated animate__fadeInDown" style=" animation-delay: 0.3s; animation-duration: 0.5s;">
+                <ion-menu-toggle auto-hide="false">
+                  <img src="../assets/icon/avatar.svg" class="avatar">
+                </ion-menu-toggle>
+              </ion-col>
+            <ion-col id="cuenta" size="12" class="ion-padding animate__animated animate__fadeInUp" align="center" style="margin-top: -8%; animation-delay: 0.3s !important; animation-duration: 0.5s;"></ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-list class="ion-padding" style="padding-top: 0%;">
+          <ion-menu-toggle auto-hide="false">
+            <ion-grid>
+              <ion-row align="center">
+                <ion-col>
+                  <!-- style="background: red;" -->
+                  <section class="animate__animated animate__fadeInLeft" [routerDirection]="'root'" [routerLink]="['/menu']" style="background: #e6e6e6; height: 60px; width: 60px; border-radius: 50%; float: right; animation-delay: 0.2s !important; animation-duration: 0.5s;">
+                    <img src="../assets/icon/home_.svg" width="60%" style="margin-top: 20%;" alt="">
+                  </section>
+                </ion-col>
+                <ion-col>
+                  <!-- style="background: blue;" -->
+                  <section class="animate__animated animate__fadeIn" [routerDirection]="'root'" [routerLink]="['/order']" style="background: #e6e6e6; height: 60px; width: 60px; border-radius: 50%; margin: 0 auto; animation-delay: 0.3s; animation-duration: 0.5s;">
+                    <img class="cart-icon" src="../../../assets/icon/cart.svg" style="margin: 0 auto; margin-top: 8%; position: fixed; margin-left: -7% !important;" width="15%">
+                    <span style="margin-top: 10% !important; margin-left: -5% !important; position: absolute; color: black; font-size: 1.4em;" id="badgepedidos"></span>
+                  </section>
+                </ion-col>
+                <ion-col>
+                  <!-- style="background: yellow;" -->
+                  <section class="animate__animated animate__fadeInRight" [routerDirection]="'root'" [routerLink]="['/favorite']" style="background: #e6e6e6; height: 60px; width: 60px; border-radius: 50%; float: left; animation-delay: 0.4s; animation-duration: 0.5s;">
+                    <img src="../assets/icon/heart_.svg" width="60%" style="margin-top: 20%;" alt="">
+                  </section>
+                </ion-col>
+              </ion-row>
+              <br>
+            </ion-grid>
+            <!-- <div [routerDirection]="'root'" [routerLink]="['/menu']" style="padding: 7% 6% 7% 15%;">
+              <ion-row>
+                <ion-col size="2">
+                  <img src="../assets/icon/home_.svg" width="60%" alt="">
+                </ion-col>
+                <ion-col size="10">
+                  <ion-label>Inicio</ion-label>
+                </ion-col>
+              </ion-row>
+            </div>
+            <div [routerDirection]="'root'" [routerLink]="['/order']" style="padding: 7% 6% 7% 15%;">
+              <ion-row>
+                <ion-col size="2">
+                  <img src="../assets/icon/cart_.svg" width="60%" alt="">
+                </ion-col>
+                <ion-col size="8">
+                  <ion-label>Tus pedidos</ion-label>
+                </ion-col>
+                <ion-col size="2" align="center">
+                  <ion-badge color="light" id="badgepedidos"> 0 </ion-badge>
+                </ion-col>
+              </ion-row>
+            </div> -->
+            <!-- <div [routerDirection]="'root'" [routerLink]="['/trackorder']" style="padding: 7% 6% 7% 15%;">
+            <ion-row>
+            <ion-col size="2">
+            <img src="../assets/icon/heart.svg" width="60%" alt="">
+            </ion-col>
+            <ion-col size="10">
+            <ion-label>
+            Rastrear pedido
+            </ion-label>
+            </ion-col>
+            </ion-row>
+            </div> -->
+            <!-- <div [routerDirection]="'root'" [routerLink]="['/favorite']" style="padding: 7% 6% 7% 15%;">
+              <ion-row>
+                <ion-col size="2">
+                  <img src="../assets/icon/heart_.svg" width="60%" alt="">
+                </ion-col>
+                <ion-col size="10">
+                  <ion-label>Favoritos</ion-label>
+                </ion-col>
+              </ion-row>
+            </div> -->
+            <div class="animate__animated animate__fadeInUp" [routerDirection]="'root'" [routerLink]="['/user']" style="padding: 7% 6% 7% 15%; animation-delay:0.1s !important; animation-duration: 0.5s;">
+              <ion-row>
+                <ion-col size="2">
+                  <img src="../assets/icon/user_.svg" width="50%" alt="">
+                </ion-col>
+                <ion-col size="10">
+                  <ion-label>Mi cuenta</ion-label>
+                </ion-col>
+              </ion-row>
+            </div>
+            <div class="animate__animated animate__fadeInUp" [routerDirection]="'root'" [routerLink]="['/cards']" style="padding: 7% 6% 7% 15%; animation-delay:0.2s !important; animation-duration: 0.5s;">
+              <ion-row>
+                <ion-col size="2">
+                  <img src="../assets/icon/card_.svg" width="60%" alt="">
+                </ion-col>
+              <ion-col size="10">
+                <ion-label>Pago</ion-label>
+              </ion-col>
+              </ion-row>
+            </div>
+            <div class="animate__animated animate__fadeInUp" [routerDirection]="'root'" [routerLink]="['/directions']" style="padding: 7% 6% 7% 15%; animation-delay:0.3s !important; animation-duration: 0.5s;">
+              <ion-row>
+                <ion-col size="2">
+                  <img src="../assets/icon/truck_.svg" width="60%" alt="">
+                </ion-col>
+                <ion-col size="10">
+                  <ion-label>Direcciones de envío</ion-label>
+                </ion-col>
+              </ion-row>
+            </div>
+            <div class="animate__animated animate__fadeInUp" [routerDirection]="'root'" [routerLink]="['/orderview']" style="padding: 7% 6% 7% 15%; animation-delay:0.4s !important; animation-duration: 0.5s;">
+              <ion-row>
+                <ion-col size="2">
+                  <img src="../assets/icon/doc_.svg" width="40%" alt="">
+                </ion-col>
+                <ion-col size="10">
+                  <ion-label>Historial de pedidos</ion-label>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
